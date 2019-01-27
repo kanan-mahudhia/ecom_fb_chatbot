@@ -8,10 +8,23 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Server index page
 app.get("/", function (req, res) {
-  res.send("Deployed!");
+    res.send("Deployed!");
 });
+
+
+// Facebook Webhook
+// Used for verification
+app.get("/webhook", function (req, res) {
+    if (req.query["hub.verify_token"] === "ecom_token") {
+        console.log("Verified webhook");
+        res.status(200).send(req.query["hub.challenge"]);
+    } else {
+        console.error("Verification failed. The tokens do not match.");
+        res.sendStatus(403);
+    }
+});
+
 
 request.post({
     "headers": { "content-type": "application/json" },
@@ -22,7 +35,7 @@ request.post({
         "datetime": new Date()
     })
 }, (error, response, body) => {
-    if(error) {
+    if (error) {
         return console.dir(error);
     }
     console.dir(JSON.parse(body));
@@ -40,5 +53,5 @@ request.post({
 //});
 
 app.listen(PORT, () => {
-  console.log('Server is running on port ' + PORT);
+    console.log('Server is running on port ' + PORT);
 });
