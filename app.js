@@ -90,7 +90,7 @@ function processMessage(event) {
         if (message.text) {
             console.log(message.text);
             
-            sendMessage(senderId, message.text);
+            sendMessage(senderId, { text: message.text });
         }
     }
 }
