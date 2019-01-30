@@ -88,7 +88,7 @@ function processMessage(event) {
         console.log("Message is: " + JSON.stringify(message));
 
         if (message.text) {
-            sendMessage(senderId, message);
+            sendMessage(senderId, message.text);
         }
     }
 }
