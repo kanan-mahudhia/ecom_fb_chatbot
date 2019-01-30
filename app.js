@@ -78,7 +78,7 @@ function processPostback(event) {
 
 }
 
-function processMessage(event) {
+function processMessage(recipientId, message) {
     request({
         url: "https://graph.facebook.com/v2.6/me/messages",
         qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
