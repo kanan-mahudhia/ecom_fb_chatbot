@@ -110,6 +110,7 @@ function sendMessage(recipientId, message) {
         if (error) {
             console.log("Error sending message: " + response.error);
         }
+        console.log(body);
     });
 }
 
