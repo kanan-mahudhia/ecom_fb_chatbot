@@ -81,13 +81,15 @@ function processPostback(event) {
 
 function processMessage(event) {
     if (!event.message.is_echo) {
-        var message = JSON.stringify(event.message);
+        var message = event.message;
         var senderId = event.sender.id;
 
         console.log("Received message from senderId: " + senderId);
-        console.log("Message is: " + message.text);
+        console.log("Message is: " + JSON.stringify(message));
 
         if (message.text) {
+            console.log(message.text);
+            
             sendMessage(senderId, message.text);
         }
     }
