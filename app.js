@@ -51,9 +51,7 @@ function processPostback(event) {
     var senderId = event.sender.id;
     var payload = event.postback.payload;
     console.log("-------------------->" + event.postback.payload);
-    console.log("Received message from senderId: " + senderId);
-    console.log("Message is: " + JSON.stringify(message));
-    
+
     if (payload === "GET_STARTED_PAYLOAD") {
         // Get user's first name from the User Profile API
         // and include it in the greeting
@@ -81,7 +79,21 @@ function processPostback(event) {
 
 }
 
-function processMessage(recipientId, message) {
+function processMessage(event) {
+    if (!event.message.is_echo) {
+        var message = event.message;
+        var senderId = event.sender.id;
+
+        console.log("Received message from senderId: " + senderId);
+        console.log("Message is: " + JSON.stringify(message));
+
+        if (message.text) {
+            sendMessage(senderId, message);
+        }
+    }
+}
+
+function sendMessage(recipientId, message) {
     request({
         url: "https://graph.facebook.com/v2.6/me/messages",
         qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
