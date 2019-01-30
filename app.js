@@ -71,9 +71,8 @@ function processPostback(event) {
                 var bodyObj = JSON.parse(body);
                 name = bodyObj.first_name;
                 greeting = "Hello " + name + ". ";
+                sendMessage(senderId, { text: greeting });
             }
-
-            sendMessage(senderId, { text: greeting });
         });
     }
 
@@ -89,7 +88,6 @@ function processMessage(event) {
 
         if (message.text) {
             console.log(message.text);
-            
             sendMessage(senderId, { text: message.text });
         }
     }
