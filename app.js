@@ -51,6 +51,9 @@ function processPostback(event) {
     var senderId = event.sender.id;
     var payload = event.postback.payload;
     console.log("-------------------->" + event.postback.payload);
+    console.log("Received message from senderId: " + senderId);
+    console.log("Message is: " + JSON.stringify(message));
+    
     if (payload === "GET_STARTED_PAYLOAD") {
         // Get user's first name from the User Profile API
         // and include it in the greeting
