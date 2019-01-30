@@ -52,7 +52,7 @@ function processPostback(event) {
     var payload = event.postback.payload;
     console.log("-------------------->" + event.postback.payload);
 
-    if (payload === "GET_STARTED_PAYLOAD") {
+    if (payload === "Greeting") {
         // Get user's first name from the User Profile API
         // and include it in the greeting
         state = 0;
@@ -64,7 +64,6 @@ function processPostback(event) {
             },
             method: "GET"
         }, function (error, response, body) {
-            console.log(body);
             var greeting = "";
             if (error) {
                 console.log("Error getting user's name: " + error);
